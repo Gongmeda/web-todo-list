@@ -3,6 +3,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/77ef208b4e.js" crossorigin="anonymous"></script>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/style.css">
     <title>To-do List</title>
 </head>
@@ -20,13 +21,25 @@
                     </div>
                     <div id="lists">
                         <ul>
-                            <li class="list_element done">웹 프로그래밍 공부</li>
-                            <li class="list_element done">헬스</li>
-                            <li class="list_element pass">영화 보기</li>
-                            <li class="list_element undone">계란 사오기</li>
+                            <li class="list_element done">
+                                웹 프로그래밍 공부
+                                <button class="edit_btn"></button>
+                            </li>
+                            <li class="list_element done">
+                                헬스
+                                <button class="edit_btn"></button>
+                            </li>
+                            <li class="list_element pass">
+                                영화 보기
+                                <button class="edit_btn"></button>
+                            </li>
+                            <li class="list_element undone">
+                                계란 사오기
+                                <button class="edit_btn"></button>
+                            </li>
                         </ul>
                     </div>
-                    <button id="add_btn">add</button>
+                    <button id="add_btn"><i class="fas fa-plus fa-2x" style="color:#707070;"></i></button>
                 </div>
             </div>
         </div>
