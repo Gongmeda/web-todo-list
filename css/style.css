@@ -74,28 +74,25 @@ html {
 #add_btn {
     width: 80px;
     height: 80px;
-    margin-left: 315px;
-    margin-top: 180px;
-    background-color: white;
-    transition: 0.3s;
+    position: relative;
+    left: 315px;
+    top: 180px;
 
-    border: none;
-    border-radius: 100%;
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.3);
-}
-
-#add_btn:hover {
-    background-color: black;
-    background-color: #F6F5F1;
 }
 
 #add_btn:active {
     box-shadow: none;
-    transition: 0.1s;
 }
 
-#add_btn:focus {
-    outline: 0;
+#add_menu {
+    width: fit-content;
+    height: fit-content;
+    position: relative;
+    left: 325px;
+    top: -60px;
+    display: flex;
+    flex-direction: column;
 }
 
 .list_element {
@@ -109,9 +106,40 @@ html {
     border-bottom: 0.05rem solid #D8D8D8;
 }
 
+.btn {
+    background-color: white;
+    transition: 0.3s;
+
+    border: none;
+    border-radius: 50%;
+}
+
+.btn:hover {
+    background-color: #F6F5F1;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.3);
+}
+
+.btn:active {
+    box-shadow: none;
+    transition: 0.1s;
+}
+
+.btn:focus {
+    outline: 0;
+}
+
 .edit_btn {
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
+    color: #DB8784;
+}
+
+.float_btn {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 20px;
+
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.3);
 }
 
 footer {
