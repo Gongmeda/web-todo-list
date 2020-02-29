@@ -33,14 +33,16 @@ html {
     height: fit-content;
 }
 
-#list_box {
+#box {
     width: 450px;
-    height: 800px;
+    min-height: 800px;
     background: white;
 
     border: 0.05rem solid #707070;
     border-radius: 50px;
 }
+
+
 
 #date {
     width: 99.9%;
@@ -56,6 +58,7 @@ html {
 }
 
 #content {
+    position: relative;
     width: 400px;
     height: 630px;
     padding: 25px;
@@ -63,7 +66,7 @@ html {
 
 #memo {
     width: auto;
-    height: 80px;
+    min-height: 80px;
     padding: 20px 25px;
     background-color: #F6F5F1;
 
@@ -80,6 +83,15 @@ html {
     justify-content: space-between;
 
     border-bottom: 0.05rem solid #D8D8D8;
+}
+
+.main {
+    width: 400px;
+    height: 530px;
+    position: absolute;
+    top: 25px;
+    z-index: 10;
+    overflow: scroll;
 }
 
 .btn {
@@ -114,14 +126,6 @@ html {
     color: #DB8784;
 }
 
-.float_wrap {
-    height: 260px;
-    width: 400px;
-    display: flex;
-    flex-direction: column-reverse;
-    align-items: flex-end;
-}
-
 .add_btn {
     width: 80px;
     height: 80px;
@@ -131,6 +135,20 @@ html {
 
 .add_btn:active {
     box-shadow: none;
+}
+
+.float_wrap {
+    width: fit-content;
+    position: absolute;
+    bottom: 25px;
+    right: 25px;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-end;
+}
+
+.float_wrap_active {
+    z-index: 11;
 }
 
 .float_btn {
