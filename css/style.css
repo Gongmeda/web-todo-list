@@ -12,6 +12,7 @@ html {
     color: #707070;
     font-size: 1.2rem;
     letter-spacing: 0.1rem;
+    background: #F6F5F1;
 }
 
 #wrap {
@@ -25,7 +26,6 @@ html {
     display:flex;
     align-items:center;
     justify-content:center;
-    background: #F6F5F1;
 }
 
 #container {
@@ -71,30 +71,6 @@ html {
     border-bottom: 0.15rem solid #707070;
 }
 
-#add_btn {
-    width: 80px;
-    height: 80px;
-    position: relative;
-    left: 315px;
-    top: 180px;
-
-    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.3);
-}
-
-#add_btn:active {
-    box-shadow: none;
-}
-
-#add_menu {
-    width: fit-content;
-    height: fit-content;
-    position: relative;
-    left: 325px;
-    top: -60px;
-    display: flex;
-    flex-direction: column;
-}
-
 .list_element {
     width: auto;
     height: 60px;
@@ -108,7 +84,11 @@ html {
 
 .btn {
     background-color: white;
+    color: #707070;
     transition: 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     border: none;
     border-radius: 50%;
@@ -134,12 +114,45 @@ html {
     color: #DB8784;
 }
 
+.float_wrap {
+    height: 260px;
+    width: 400px;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-end;
+}
+
+.add_btn {
+    width: 80px;
+    height: 80px;
+
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.3);
+}
+
+.add_btn:active {
+    box-shadow: none;
+}
+
 .float_btn {
+    visibility: hidden;
+    opacity: 0;
     width: 60px;
     height: 60px;
     margin-bottom: 20px;
+    margin-right: 10px;
+    position: relative;
+    top: 60px;
 
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.3);
+}
+
+.float_btn_active {
+    visibility: visible;
+    opacity: 1;
+    position: relative;
+    top: 0px;
+    transition: 0.5s;
+    transition-timing-function: ease-out;
 }
 
 footer {
