@@ -15,27 +15,27 @@ html {
     background: #F6F5F1;
 }
 
+body {
+    margin: 0;
+    padding: 0;
+}
+
 #wrap {
     width: 100%;
     height: 100%;
-    position:absolute;
-    top:0;
-    right:0;
-    bottom:0;
-    left:0;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
-
-#container {
-    width: fit-content;
-    height: fit-content;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #box {
     width: 450px;
-    min-height: 800px;
+    height: 85%;
     background: white;
 
     border: 0.05rem solid #707070;
@@ -45,7 +45,7 @@ html {
 
 
 #date {
-    width: 99.9%;
+    width: 100%;
     height: 120px;
     display: flex;
     align-items:center;
@@ -60,7 +60,7 @@ html {
 #content {
     position: relative;
     width: 400px;
-    height: 630px;
+    height: calc(100% - 170px);
     padding: 25px;
 }
 
@@ -87,7 +87,7 @@ html {
 
 .main {
     width: 400px;
-    height: 530px;
+    height: calc(100% - 155px);
     position: absolute;
     top: 25px;
     z-index: 10;
@@ -176,8 +176,9 @@ html {
 footer {
     position: absolute;
     right: 0;
-    bottom: 0;
-    margin: 3rem;
+    bottom: 7.5%;
+    margin-right: 3rem;
+
     text-align: right;
 }
 
@@ -200,8 +201,51 @@ ul {
     margin: 0;
 }
 
+/* responsive footer */
 @media screen and (max-width: 1200px) {
     footer {
         display: none;
+    }
+}
+
+/* responsive mobile web */
+@media screen and (max-width: 550px) {
+    #wrap {
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+    
+    #box {
+        width: 90%;
+        height: 85%;
+        margin-top: 20px;
+    }
+
+    #content {
+        width: calc(100% - 50px);
+        padding: 25px;
+    }
+
+    .main {
+        width: calc(100% - 50px);
+        top: 25px;
+    }
+
+    footer {
+        height: calc(15% - 20px);
+        margin: 0;
+        position: initial;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    footer div {
+        margin-top: 0;
+    }
+
+    footer i {
+        margin-left: 0;
+        margin-right: 0.8rem;
     }
 }

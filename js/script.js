@@ -1,9 +1,9 @@
 
 //// get current date
 let today = new Date();
-var dd = String(today.getDate()).padStart(2, '0');
-var mm = String(today.getMonth() + 1).padStart(2, '0');
-var yyyy = today.getFullYear();
+let dd = String(today.getDate()).padStart(2, '0');
+let mm = String(today.getMonth() + 1).padStart(2, '0');
+let yyyy = today.getFullYear();
 today = yyyy + '년 ' + mm + '월 ' + dd + '일';
 document.querySelector('#date').innerText = today;
 
