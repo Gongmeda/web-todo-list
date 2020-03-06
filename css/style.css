@@ -51,6 +51,13 @@ body {
     align-items:center;
     justify-content: center;
     text-align: center;
+    cursor: default;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     
     font-size: 1.8rem;
 
@@ -65,6 +72,7 @@ body {
 }
 
 #memo {
+    display: none;
     width: auto;
     min-height: 80px;
     padding: 20px 25px;
@@ -196,7 +204,8 @@ body {
 }
 
 .modal_header {
-    height: 80px;
+    height: 60px;
+    padding: 10px;
     text-align: center;
     background-color: white;
     color: #707070;
@@ -208,7 +217,7 @@ body {
 
 .modal_header div,
 .modal_footer div {
-    width: 100%;
+    width: calc(100% - 20px);
     height: inherit;
     position: absolute;
     display: flex;
@@ -218,11 +227,11 @@ body {
 
 .modal_header div:nth-child(2) {
     position: absolute;
-    right: 3%;
+    right: 10px;
     width: fit-content;
 }
 
-.close {
+.modal_icon {
     padding: 10px;
     display: flex;
     align-items: center;
@@ -230,21 +239,35 @@ body {
     z-index: 100;
 }
 
-.close:hover,
-.close:focus {
+.modal_icon:hover,
+.modal_icon:focus {
     color: #D8D8D8;
     text-decoration: none;
     cursor: pointer;
 }
 
 .modal_body {
-    padding: 2px 16px;
+    padding: 20px;
     border-bottom: 0.05rem solid #D8D8D8;
 }
 
+.modal_body textarea {
+    width: calc(100% - 2rem);
+    padding: 1rem;
+    font-family: 'Chosunilbo_myungjo';
+    color: #707070;
+    font-size: 1rem;
+    letter-spacing: 0.1rem;
+    resize: none;
+
+    border: 0.05rem solid #D8D8D8;
+}
+
 .modal_footer {
-    height: 80px;
-    text-align: center;
+    height: 60px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
     background-color: white;
     color: #707070;
 
