@@ -1,3 +1,17 @@
+//// animate.css function
+function animateCSS(element, animationName, animationSpeed, callback) {
+    const node = document.querySelector(element)
+    node.classList.add('animated', animationSpeed, animationName)
+
+    function handleAnimationEnd() {
+        node.classList.remove('animated', animationSpeed, animationName)
+        node.removeEventListener('animationend', handleAnimationEnd)
+
+        if (typeof callback === 'function') callback()
+    }
+
+    node.addEventListener('animationend', handleAnimationEnd)
+}
 
 //// get current date
 let today = new Date();
@@ -36,14 +50,23 @@ function modal_open(btn, set_modal) {
     btn.onclick = function () {
         set_modal();
         modal.style.display = "flex";
+        modal.classList.toggle('modal_fadein');
+        console.log('여기');
+        animateCSS('.modal_content', 'fadeInDown', 'faster', function() {
+            modal.classList.toggle('modal_fadein');
+        });
     }
 }
 // close modal function
 function modal_close() {
-    modal.style.display = "none";
-    modal_header.childNodes[1].innerText = 'Header';
-    modal_body.innerHTML = '<p>Body</p>';
-    modal_footer.innerHTML = '<div>Footer</div>';
+    modal.classList.toggle('modal_fadeout');
+    animateCSS('.modal_content', 'fadeOutDown', 'faster', function() {
+        modal.style.display = "none";
+        modal_header.childNodes[1].innerText = 'Header';
+        modal_body.innerHTML = '<p>Body</p>';
+        modal_footer.innerHTML = '<div>Footer</div>';
+        modal.classList.toggle('modal_fadeout');
+    });
 }
 // modal close button
 document.querySelector('.close').onclick = function () {
@@ -90,16 +113,7 @@ function memo_modal_open() {
     }
     // edit memo
     document.querySelector('.memo_edit').onclick = function() {
-        let lines = memo_area.value.split("\n");
-        let result_string = '';
-        for (let i = 0; i < lines.length; i++) {
-            if (i == lines.length - 1) {
-                result_string += lines[i];
-            } else {
-                result_string += lines[i] + "\n";
-            }
-        }
-        memo.innerText = result_string;
+        memo.innerText = memo_area.value;
         modal_close();
         memo_reload();
     }
@@ -111,5 +125,14 @@ function memo_reload() {
         memo.style.display = "none";
     } else {
         memo.style.display = "block";
+    }
+}
+
+//// profile button animation
+let prof_icons = document.querySelectorAll('.prof_icon');
+for (icon in prof_icons) {
+    prof_icons.item(icon).onmouseover = function() {
+        console.log(this);
+        animateCSS('#copy', 'pulse', 'default');
     }
 }
