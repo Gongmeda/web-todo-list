@@ -51,7 +51,6 @@ function modal_open(btn, set_modal) {
         set_modal();
         modal.style.display = "flex";
         modal.classList.toggle('modal_fadein');
-        console.log('여기');
         animateCSS('.modal_content', 'fadeInDown', 'faster', function() {
             modal.classList.toggle('modal_fadein');
         });
@@ -88,7 +87,7 @@ let modal_footer = document.querySelector('.modal_footer');
 // set modal to memo and open modal
 function memo_modal_open() {
     modal_header.childNodes[1].innerText = 'memo';
-    modal_body.innerHTML = '<textarea name="memo" id="memo_area" cols="30" rows="10" placeholder="write memo here."></textarea>';
+    modal_body.innerHTML = '<textarea name="memo" id="memo_area" cols="30" rows="8" placeholder="write memo here."></textarea>';
     modal_footer.innerHTML = '<i class="modal_icon memo_delete fas fa-trash-alt fa-xs"></i><i class="modal_icon memo_edit far fa-check-square fa-sm"></i>'
     // keep original memo in the textarea
     let memo_area = document.querySelector('#memo_area');
@@ -132,7 +131,6 @@ function memo_reload() {
 let prof_icons = document.querySelectorAll('.prof_icon');
 for (icon in prof_icons) {
     prof_icons.item(icon).onmouseover = function() {
-        console.log(this);
         animateCSS('#copy', 'pulse', 'default');
     }
 }

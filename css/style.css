@@ -12,6 +12,7 @@ html {
     color: #707070;
     font-size: 1.2rem;
     letter-spacing: 0.1rem;
+    line-height: 2rem;
     background: #F6F5F1;
 }
 
@@ -80,6 +81,10 @@ body {
 
     border-top: 0.15rem solid #707070;
     border-bottom: 0.15rem solid #707070;
+}
+
+#memo_area {
+    line-height: 1.5rem;
 }
 
 .list_element {
@@ -365,6 +370,16 @@ ul {
         padding: 0.8rem;
 
         font-size: 0.8rem;
+    }
+
+    #memo {
+        min-height: 60px;
+        line-height: 1.2rem;
+        padding: 0.8rem;
+    }
+
+    #memo_area {
+        line-height: 1.2rem;
     }
 
     .main {
