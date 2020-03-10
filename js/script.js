@@ -119,6 +119,13 @@ function list_reload() {
 
         lists.appendChild(el);
     })
+    // show that list is empty
+    let notice = document.querySelector('#notice');
+    if (list_array.length == 0) {
+        notice.style.display = "flex";
+    } else {
+        notice.style.display = "none";
+    }
 }
 // initial reload function execution
 window.addEventListener('DOMContentLoaded', function() {
