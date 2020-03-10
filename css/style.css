@@ -82,9 +82,18 @@ body {
     border-top: 0.15rem solid #707070;
     border-bottom: 0.15rem solid #707070;
 }
-
-#memo_area {
+#memo_area,
+#list_area {
+    width: calc(100% - 2rem);
+    padding: 1rem;
+    font-family: 'Chosunilbo_myungjo';
+    color: #707070;
+    font-size: 1rem;
+    letter-spacing: 0.1rem;
     line-height: 1.5rem;
+    resize: none;
+
+    border: 0.05rem solid #D8D8D8;
 }
 
 .list_element {
@@ -282,18 +291,6 @@ body {
 .modal_body {
     padding: 20px;
     border-bottom: 0.05rem solid #D8D8D8;
-}
-
-.modal_body textarea {
-    width: calc(100% - 2rem);
-    padding: 1rem;
-    font-family: 'Chosunilbo_myungjo';
-    color: #707070;
-    font-size: 1rem;
-    letter-spacing: 0.1rem;
-    resize: none;
-
-    border: 0.05rem solid #D8D8D8;
 }
 
 .modal_footer {
