@@ -84,8 +84,10 @@ window.onclick = function (event) {
 //// add / delete list-element function
 let lists = document.querySelector('#lists');
 let add_list_btn = document.querySelector('#add_list');
+let edit_btns;
 // list-element object / array
 let list_element = function (list_text, list_state) {
+    this.list_key = new Date().getTime() + Math.random();
     this.list_text = list_text;
     this.list_state = list_state;
 }
@@ -99,6 +101,7 @@ function list_reload() {
     list_delete_all();
     list_array.forEach(function(element) {
         let el = document.createElement('li');
+        el.id = element.list_key;
         el.classList.add("list_element", element.list_state);
         // set text
         let el_text = document.createTextNode(element.list_text);
@@ -116,7 +119,6 @@ function list_reload() {
             console.log('error in the list_array')
         }
         el.appendChild(btn);
-
         lists.appendChild(el);
     })
     // show that list is empty
@@ -126,6 +128,8 @@ function list_reload() {
     } else {
         notice.style.display = "none";
     }
+    list_add_event();
+    console.log('list reloaded');
 }
 // initial reload function execution
 window.addEventListener('DOMContentLoaded', function() {
@@ -160,11 +164,28 @@ function list_delete_all() {
         lists.removeChild(lists.firstChild);
     }
 }
+// edit button click event
+function list_delete_single(element) {
+    for (el in list_array) {
+        if(list_array[el].list_key == element.parentNode.id) {
+            list_array.splice(el, 1);
+        }
+    }
+    console.log('list-element deleted : key = ' + element.parentNode.id);
+    list_reload();
+}
+function list_add_event() {
+    edit_btns = document.querySelectorAll('.edit_btn');
+    edit_btns.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            list_delete_single(this);
+        });
+    })
+}
 
 //// add / delete memo function
 let memo = document.querySelector('#memo');
 let add_memo_btn = document.querySelector('#add_memo');
-
 // set modal to memo and open modal
 function memo_modal_open() {
     modal_header.firstElementChild.innerText = 'memo';
