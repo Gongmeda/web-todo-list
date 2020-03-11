@@ -93,19 +93,23 @@ let list_element = function (list_text, list_state) {
 }
 let list_array = [];
 // push examples in the array
-list_array.push(new list_element('웹프로그래밍 공부', 'done'));
-list_array.push(new list_element('헬스', 'ongoing'));
-list_array.push(new list_element('영화 보기', 'undone'));
+list_array.push(new list_element('Click the right red', 'undone'));
+list_array.push(new list_element('button to edit list elements.', 'undone'));
+list_array.push(new list_element('Click the bottom right', 'undone'));
+list_array.push(new list_element('button to add stuff.', 'undone'));
 // show all list-elements in the array
 function list_reload() {
     list_delete_all();
     list_array.forEach(function(element) {
         let el = document.createElement('li');
+        let el_div = document.createElement('div');
+        let el_text = document.createTextNode(element.list_text);
         el.id = element.list_key;
         el.classList.add("list_element", element.list_state);
+        el_div.classList.add("list_element_text");
         // set text
-        let el_text = document.createTextNode(element.list_text);
-        el.appendChild(el_text);
+        el_div.appendChild(el_text);
+        el.appendChild(el_div);
         // set button
         let btn = document.createElement('button');
         btn.classList.add("btn", "edit_btn");
@@ -138,7 +142,7 @@ window.addEventListener('DOMContentLoaded', function() {
 // set modal to list and open modal
 function list_modal_open() {
     modal_header.firstElementChild.innerText = 'To-do';
-    modal_body.innerHTML = '<input type="text" name="" id="list_area" placeholder="write To-do here.">';
+    modal_body.innerHTML = '<input type="text" name="list" id="list_area" placeholder="write To-do here.">';
     modal_footer.innerHTML = '<i class="modal_icon list_delete fas fa-trash-alt fa-xs"></i><i class="modal_icon list_edit far fa-check-square fa-sm"></i>'
     // delete list
     document.querySelector('.list_delete').onclick = function () {
@@ -148,6 +152,7 @@ function list_modal_open() {
     }
     // edit list
     document.querySelector('.list_edit').onclick = function () {
+        let list_area = document.querySelector('#list_area');
         if (list_area.value == '') {
             window.alert('you have to input text!');
         } else {
@@ -158,49 +163,109 @@ function list_modal_open() {
     }
 }
 modal_open(add_list_btn, list_modal_open);
+// add eventlistner to all edit buttons
+function list_add_event() {
+    edit_btns = document.querySelectorAll('.edit_btn');
+    edit_btns.forEach(function (btn) {
+        modal_open(btn, function () {
+            edit_modal_open(btn);
+        });
+    });
+}
 // delete all element
 function list_delete_all() {
     while (lists.firstChild) {
         lists.removeChild(lists.firstChild);
     }
 }
-// edit button onclick event
+// delete single element
 function list_delete_single(element) {
     for (el in list_array) {
         if(list_array[el].list_key == element.parentNode.id) {
             list_array.splice(el, 1);
         }
     }
-    console.log('list-element deleted : key = ' + element.parentNode.id);
-    list_reload();
+}
+// change text of single element
+function list_change_text(element, text) {
+    for (el in list_array) {
+        if (list_array[el].list_key == element.parentNode.id) {
+            list_array[el].list_text = text;
+        }
+    }
+}
+// change state of single element
+function list_change_state(element, state) {
+    for (el in list_array) {
+        if (list_array[el].list_key == element.parentNode.id) {
+            list_array[el].list_state = state;
+        }
+    }
 }
 // set modal to edit list-element function
 function edit_modal_open(button) {
-    modal_header.firstElementChild.innerText = button.parentNode.innerText;
-    modal_body.innerHTML = 'Not yet';
+    modal_header.firstElementChild.innerText = 'edit';
+    modal_body.innerHTML = '<input type="text" name="list_edit" id="edit_area" placeholder="write To-do here."><div id="edit_state_area"><button id="edit_undone" class="btn edit_state_btn"><i class="fas fa-times fa-2x"></i></button><button id="edit_ongoing" class="btn edit_state_btn"><i class="fas fa-long-arrow-alt-right fa-2x"></i></button><button id="edit_done" class="btn edit_state_btn"><i class="fas fa-check fa-2x"></i></button></div>';
     modal_footer.innerHTML = '<i class="modal_icon element_delete fas fa-trash-alt fa-xs"></i><i class="modal_icon element_edit far fa-check-square fa-sm"></i>'
+    // keep original text in the input area
+    let this_list = button.parentNode;
+    let element_text = this_list.innerText;
+    let edit_area = document.querySelector('#edit_area');
+    let edit_state_btns = document.querySelectorAll('.edit_state_btn');
+    edit_area.value = element_text;
+    // get chosen state and keep original state
+    let chosen_state;
+    let edit_undone = document.querySelector('#edit_undone');
+    let edit_ongoing = document.querySelector('#edit_ongoing');
+    let edit_done = document.querySelector('#edit_done');
+    
+    if (this_list.classList.contains('undone')) {
+        chosen_state = 'undone';
+        edit_undone.classList.toggle('selected');
+    } else if (this_list.classList.contains('ongoing')) {
+        chosen_state = 'ongoing';
+        edit_ongoing.classList.toggle('selected');
+    } else if (this_list.classList.contains('done')) {
+        chosen_state = 'done';
+        edit_done.classList.toggle('selected');
+    }
+    // 
+    function clear_selection(index) {
+        edit_state_btns.forEach(function(btn) {
+            btn.classList.remove('selected');
+        })
+        edit_state_btns[index].classList.add('selected');
+    }
+    // add onclick event on edit_state_btn
+    edit_undone.onclick = function() {
+        clear_selection(0);
+        chosen_state = 'undone';
+    }
+    edit_ongoing.onclick = function() {
+        clear_selection(1);
+        chosen_state = 'ongoing';
+    }
+    edit_done.onclick = function() {
+        clear_selection(2);
+        chosen_state = 'done';
+    }
     // delete list-element
     document.querySelector('.element_delete').onclick = function () {
         modal_close();
         list_delete_single(button);
-    }
-    // edit list-element state
-    document.querySelector('.element_edit').onclick = function () {
-        modal_close();
-        console.log('Not yet');
         list_reload();
     }
-}
-
-// add eventlistner to all edit buttons
-function list_add_event() {
-    edit_btns = document.querySelectorAll('.edit_btn');
-    edit_btns.forEach(function(btn) {
-        modal_open(btn, function() {
-            console.log(btn);
-            edit_modal_open(btn);
-        });
-    });
+    // edit list-element
+    document.querySelector('.element_edit').onclick = function () {
+        if (edit_area.value == '') {
+            window.alert('you have to input text!');
+        } else {
+            modal_close();
+            list_change_state(button, chosen_state);
+            list_change_text(button, edit_area.value);
+        }
+        list_reload();
+    }
 }
 
 //// add / delete memo function

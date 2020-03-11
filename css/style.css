@@ -83,7 +83,8 @@ body {
     border-bottom: 0.15rem solid #707070;
 }
 #memo_area,
-#list_area {
+#list_area,
+#edit_area {
     width: calc(100% - 2rem);
     padding: 1rem;
     font-family: 'Chosunilbo_myungjo';
@@ -94,6 +95,19 @@ body {
     resize: none;
 
     border: 0.05rem solid #D8D8D8;
+}
+
+#edit_state_area {
+    width: 100%;
+    height: 100px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#edit_state_area .selected {
+    border: 0.2rem solid #707070;
 }
 
 #notice {
@@ -122,6 +136,11 @@ body {
     justify-content: space-between;
 
     border-bottom: 0.05rem solid #D8D8D8;
+}
+
+.done .list_element_text {
+    color: #D8D8D8;
+    text-decoration: line-through;
 }
 
 .main {
@@ -163,9 +182,11 @@ body {
     width: 40px;
     height: 40px;
     color: #DB8784;
+    text-decoration: none;
 }
 
-.add_btn {
+.add_btn,
+.edit_state_btn {
     width: 80px;
     height: 80px;
 
@@ -397,6 +418,15 @@ ul {
         line-height: 1.2rem;
     }
 
+    #edit_state_area {
+        width: 100%;
+        height: calc(1.2*100vw - 18rem);
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+
     #notice {
         font-size: 1.2rem;
     }
@@ -418,7 +448,8 @@ ul {
         right: 0.8rem;
     }
 
-    .add_btn {
+    .add_btn,
+    .edit_state_btn {
         width: 3.4rem;
         height: 3.4rem;
     }
@@ -445,6 +476,10 @@ ul {
 
     .modal_content {
         width: 100%;
+    }
+
+    .modal_body {
+        padding: 1rem;
     }
 
     footer {
