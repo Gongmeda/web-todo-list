@@ -164,7 +164,7 @@ function list_delete_all() {
         lists.removeChild(lists.firstChild);
     }
 }
-// edit button click event
+// edit button onclick event
 function list_delete_single(element) {
     for (el in list_array) {
         if(list_array[el].list_key == element.parentNode.id) {
@@ -174,13 +174,33 @@ function list_delete_single(element) {
     console.log('list-element deleted : key = ' + element.parentNode.id);
     list_reload();
 }
+// set modal to edit list-element function
+function edit_modal_open(button) {
+    modal_header.firstElementChild.innerText = button.parentNode.innerText;
+    modal_body.innerHTML = 'Not yet';
+    modal_footer.innerHTML = '<i class="modal_icon element_delete fas fa-trash-alt fa-xs"></i><i class="modal_icon element_edit far fa-check-square fa-sm"></i>'
+    // delete list-element
+    document.querySelector('.element_delete').onclick = function () {
+        modal_close();
+        list_delete_single(button);
+    }
+    // edit list-element state
+    document.querySelector('.element_edit').onclick = function () {
+        modal_close();
+        console.log('Not yet');
+        list_reload();
+    }
+}
+
+// add eventlistner to all edit buttons
 function list_add_event() {
     edit_btns = document.querySelectorAll('.edit_btn');
     edit_btns.forEach(function(btn) {
-        btn.addEventListener('click', function() {
-            list_delete_single(this);
+        modal_open(btn, function() {
+            console.log(btn);
+            edit_modal_open(btn);
         });
-    })
+    });
 }
 
 //// add / delete memo function
