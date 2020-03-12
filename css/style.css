@@ -43,13 +43,11 @@ body {
     border-radius: 50px;
 }
 
-
-
 #date {
     width: 100%;
     height: 120px;
     display: flex;
-    align-items:center;
+    align-items: center;
     justify-content: center;
     text-align: center;
     cursor: default;
@@ -59,7 +57,7 @@ body {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    
+
     font-size: 1.8rem;
 
     border-bottom: 0.05rem solid #D8D8D8;
@@ -82,6 +80,7 @@ body {
     border-top: 0.15rem solid #707070;
     border-bottom: 0.15rem solid #707070;
 }
+
 #memo_area,
 #list_area,
 #edit_area {
@@ -385,7 +384,7 @@ ul {
         flex-direction: column;
         justify-content: flex-start;
     }
-    
+
     #box {
         width: 90%;
         height: calc(1.4*100vw);
@@ -393,7 +392,7 @@ ul {
 
         border-radius: 30px;
     }
-    
+
     #date {
         height: calc(0.2*100vw);
         font-size: 1.3rem;

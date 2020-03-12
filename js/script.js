@@ -1,15 +1,13 @@
 //// animate.css function
 function animateCSS(element, animationName, animationSpeed, callback) {
-    const node = document.querySelector(element)
+    const node = element;
     node.classList.add('animated', animationSpeed, animationName)
 
     function handleAnimationEnd() {
         node.classList.remove('animated', animationSpeed, animationName)
         node.removeEventListener('animationend', handleAnimationEnd)
-
         if (typeof callback === 'function') callback()
     }
-
     node.addEventListener('animationend', handleAnimationEnd)
 }
 
@@ -21,8 +19,9 @@ let yyyy = today.getFullYear();
 today = yyyy + '년 ' + mm + '월 ' + dd + '일';
 document.querySelector('#date').innerText = today;
 
-//// add_btn onclick event function
+//// floating action button click event
 let add_btn = document.querySelector('.add_btn');
+// add_btn click function
 function add_btn_click() {
     add_btn.addEventListener('click', function (e) {
         let queryList = document.querySelectorAll('.float_btn');
@@ -42,7 +41,7 @@ function add_btn_click() {
 }
 add_btn_click();
 
-//// modal fundtions
+//// modal
 let modal = document.querySelector('.modal');
 let modal_content = document.querySelector('.modal_content');
 let modal_header = document.querySelector('.modal_header');
@@ -54,7 +53,7 @@ function modal_open(btn, set_modal) {
         set_modal();
         modal.style.display = "flex";
         modal.classList.toggle('modal_fadein');
-        animateCSS('.modal_content', 'fadeInDown', 'faster', function() {
+        animateCSS(modal_content, 'fadeInDown', 'faster', function () {
             modal.classList.toggle('modal_fadein');
         });
     }
@@ -62,7 +61,7 @@ function modal_open(btn, set_modal) {
 // close modal function
 function modal_close() {
     modal.classList.toggle('modal_fadeout');
-    animateCSS('.modal_content', 'fadeOutDown', 'faster', function() {
+    animateCSS(modal_content, 'fadeOutDown', 'faster', function () {
         modal.style.display = "none";
         modal_header.childNodes[1].innerText = 'Header';
         modal_body.innerHTML = '<p>Body</p>';
@@ -81,7 +80,7 @@ window.onclick = function (event) {
     }
 }
 
-//// add / delete list-element function
+//// add / delete list-element
 let lists = document.querySelector('#lists');
 let add_list_btn = document.querySelector('#add_list');
 let edit_btns;
@@ -100,7 +99,7 @@ list_array.push(new list_element('button to add stuff.', 'undone'));
 // show all list-elements in the array
 function list_reload() {
     list_delete_all();
-    list_array.forEach(function(element) {
+    list_array.forEach(function (element) {
         let el = document.createElement('li');
         let el_div = document.createElement('div');
         let el_text = document.createTextNode(element.list_text);
@@ -133,25 +132,24 @@ function list_reload() {
         notice.style.display = "none";
     }
     list_add_event();
-    console.log('list reloaded');
 }
 // initial reload function execution
-window.addEventListener('DOMContentLoaded', function() {
+window.addEventListener('DOMContentLoaded', function () {
     list_reload();
 })
-// set modal to list and open modal
+// set modal to add list and open modal
 function list_modal_open() {
     modal_header.firstElementChild.innerText = 'To-do';
     modal_body.innerHTML = '<input type="text" name="list" id="list_area" placeholder="write To-do here.">';
-    modal_footer.innerHTML = '<i class="modal_icon list_delete fas fa-trash-alt fa-xs"></i><i class="modal_icon list_edit far fa-check-square fa-sm"></i>'
-    // delete list
+    modal_footer.innerHTML = '<i class="modal_icon list_delete fas fa-trash-alt fa-xs"></i><i class="modal_icon list_add far fa-check-square fa-sm"></i>'
+    // delete all list
     document.querySelector('.list_delete').onclick = function () {
         modal_close();
         list_array.length = 0;
         list_reload();
     }
-    // edit list
-    document.querySelector('.list_edit').onclick = function () {
+    // add list-element
+    document.querySelector('.list_add').onclick = function () {
         let list_area = document.querySelector('#list_area');
         if (list_area.value == '') {
             window.alert('you have to input text!');
@@ -181,7 +179,7 @@ function list_delete_all() {
 // delete single element
 function list_delete_single(element) {
     for (el in list_array) {
-        if(list_array[el].list_key == element.parentNode.id) {
+        if (list_array[el].list_key == element.parentNode.id) {
             list_array.splice(el, 1);
         }
     }
@@ -218,7 +216,7 @@ function edit_modal_open(button) {
     let edit_undone = document.querySelector('#edit_undone');
     let edit_ongoing = document.querySelector('#edit_ongoing');
     let edit_done = document.querySelector('#edit_done');
-    
+
     if (this_list.classList.contains('undone')) {
         chosen_state = 'undone';
         edit_undone.classList.toggle('selected');
@@ -231,29 +229,31 @@ function edit_modal_open(button) {
     }
     // 
     function clear_selection(index) {
-        edit_state_btns.forEach(function(btn) {
+        edit_state_btns.forEach(function (btn) {
             btn.classList.remove('selected');
         })
         edit_state_btns[index].classList.add('selected');
     }
     // add onclick event on edit_state_btn
-    edit_undone.onclick = function() {
+    edit_undone.onclick = function () {
         clear_selection(0);
         chosen_state = 'undone';
     }
-    edit_ongoing.onclick = function() {
+    edit_ongoing.onclick = function () {
         clear_selection(1);
         chosen_state = 'ongoing';
     }
-    edit_done.onclick = function() {
+    edit_done.onclick = function () {
         clear_selection(2);
         chosen_state = 'done';
     }
     // delete list-element
     document.querySelector('.element_delete').onclick = function () {
         modal_close();
-        list_delete_single(button);
-        list_reload();
+        animateCSS(this_list, 'fadeOutLeft', 'faster', function () {
+            list_delete_single(button);
+            list_reload();
+        });
     }
     // edit list-element
     document.querySelector('.element_edit').onclick = function () {
@@ -268,7 +268,7 @@ function edit_modal_open(button) {
     }
 }
 
-//// add / delete memo function
+//// memo
 let memo = document.querySelector('#memo');
 let add_memo_btn = document.querySelector('#add_memo');
 // set modal to memo and open modal
@@ -279,7 +279,7 @@ function memo_modal_open() {
     // keep original memo in the textarea
     let memo_area = document.querySelector('#memo_area');
     let memo_text = memo.innerHTML;
-    if(memo_text != '') {
+    if (memo_text != '') {
         let memo_lines = memo_text.split("<br>");
         let memo_result_string = '';
         for (let i = 0; i < memo_lines.length; i++) {
@@ -292,16 +292,27 @@ function memo_modal_open() {
         memo_area.innerHTML = memo_result_string;
     }
     // delete memo
-    document.querySelector('.memo_delete').onclick = function() {
+    document.querySelector('.memo_delete').onclick = function () {
         modal_close();
-        memo.innerText = '';
-        memo_reload();
+        if (memo.innerText != '') {
+            animateCSS(memo, 'zoomOut', 'faster', function () {
+                memo.innerText = '';
+                memo_reload();
+            });
+        }
     }
     // edit memo
-    document.querySelector('.memo_edit').onclick = function() {
-        memo.innerText = memo_area.value;
-        modal_close();
-        memo_reload();
+    document.querySelector('.memo_edit').onclick = function () {
+        if (memo_area.value == '') {
+            window.alert('you have to input text!');
+        } else {
+            modal_close();
+            if (memo.innerText != memo_area.value) {
+                memo.innerText = memo_area.value;
+                animateCSS(memo, 'zoomIn', 'faster');
+                memo_reload();
+            }
+        }
     }
 }
 modal_open(add_memo_btn, memo_modal_open);
@@ -316,8 +327,9 @@ function memo_reload() {
 
 //// profile button animation
 let prof_icons = document.querySelectorAll('.prof_icon');
+let copy = document.querySelector('#copy');
 for (icon in prof_icons) {
-    prof_icons.item(icon).onmouseover = function() {
-        animateCSS('#copy', 'pulse', 'default');
+    prof_icons.item(icon).onmouseover = function () {
+        animateCSS(copy, 'pulse', 'default');
     }
 }
